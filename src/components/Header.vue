@@ -57,8 +57,7 @@
                                 <button type="submit" class="btn btn-primary">Sign in</button>
                             </form>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Neu hier? Sign up</a>
-                            <!--TODO: Erstelle Sing up Page-->
+                            <a class="dropdown-item" href="#/SignUp">Neu hier? Sign up</a>
                         </ul>
                     </li>
                 </ul>
@@ -70,6 +69,7 @@
 <script setup>
 
 import { ref, onMounted } from 'vue'
+import ApiService from '../services/ApiService.js'
 
 let localStorageToken = ref(false)
 
@@ -82,7 +82,20 @@ onMounted(() => {
 });
 
 const login = () => {
-    localStorage.setItem("localcashToken", "123456");
+    const email = document.getElementById('DropdownFormEmail').value;
+    const password = document.getElementById('DropdownFormPassword').value;
+
+    const path = 'http://localhost:3000/auth/login';
+
+    const tocken = ApiService.post(path, { email, password });
+    console.log(tocken.value);
+
+    if (tocken.value === null) {
+        alert('Login fehlgeschlagen');
+        return;
+    }
+
+    localStorage.setItem("localcashToken", tocken.value);
     localStorageToken.value = true;
 }
 

@@ -22,7 +22,6 @@ export default {
         }
     },
 
-
     async put(path, data) {
         try {
             const response = await axios.put(path, data);
