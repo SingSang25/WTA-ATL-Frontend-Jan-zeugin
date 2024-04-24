@@ -92,3 +92,15 @@ onMounted(() => {
 });
 
 </script>
+
+
+
+// TODO: Addit axios to package.json
+
+//axios.get(this.apiUrl)
+//.then(response => {
+// this.users = response.data;
+//})
+//.catch(error => {
+// console.error('Error fetching users:', error);
+//});
