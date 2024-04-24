@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 export default {
-    async getAPIData(path) {
+    async get(path) {
         try {
             const response = await axios.get(path);
             const data = response.data;
@@ -12,7 +12,7 @@ export default {
         }
     },
 
-    async postAPIData(path, data) {
+    async post(path, data) {
         try {
             const response = await axios.post(path, data);
             const responseData = response.data;
@@ -23,7 +23,7 @@ export default {
     },
 
 
-    async putAPIData(path, data) {
+    async put(path, data) {
         try {
             const response = await axios.put(path, data);
             const responseData = response.data;
@@ -33,7 +33,7 @@ export default {
         }
     },
 
-    async deleteAPIData(path) {
+    async delete(path) {
         try {
             const response = await axios.delete(path);
             const responseData = response.data;

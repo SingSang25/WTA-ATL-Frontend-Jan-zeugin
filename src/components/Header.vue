@@ -29,14 +29,32 @@
                         </router-link>
                     </li>
                     <li>
-
-                        <form class="dropdown-menu text-small" @submit.prevent="login">
-                            <label for="username">Username or Email:</label><br>
-                            <input type="text" id="username" v-model="username" required><br><br>
-                            <label for="password">Password:</label><br>
-                            <input type="password" id="password" v-model="password" required><br><br>
-                            <button type="submit">Login</button>
-                        </form>
+                        <div v-if="!localStorageToken" class="dropdown text-center">
+                            <a href="#" class="d-block link-body-emphasis dropdown-toggle" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="bi bi-person-circle" style="font-size: 24px;"></i>
+                                User
+                            </a>
+                            <ul class="dropdown-menu text-small">
+                                <form class="px-4 py-3" style="min-width: 400px;">
+                                    <div class="mb-3">
+                                        <label for="DropdownFormEmail" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="DropdownFormEmail"
+                                            placeholder="email@example.com">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="DropdownFormPassword" class="form-label">Password</label>
+                                        <input type="password" class="form-control" id="DropdownFormPassword"
+                                            placeholder="Password">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Sign in</button>
+                                </form>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Neu hier? Sign up</a>
+                                <!--TODO: Erstelle Sing up Page-->
+                            </ul>
+                        </div>
+                        <button v-else @click="logout" class="dropdown-item">Logout</button>
                     </li>
                 </ul>
             </div>
@@ -58,13 +76,14 @@ onMounted(() => {
     }
 });
 
+const login = () => {
+    localStorage.setItem("localcashToken", "123456");
+    localStorageToken.value = true;
+}
+
 const logout = () => {
     localStorage.removeItem("localcashToken");
     localStorageToken.value = false;
-}
-
-const openLoginModal = () => {
-
 }
 
 </script>
