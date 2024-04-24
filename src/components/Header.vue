@@ -68,35 +68,44 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue'
-import ApiService from '../services/ApiService.js'
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 let localStorageToken = ref(false)
+const Token = ref(localStorage.getItem("localcashToken") !== null);
 
 onMounted(() => {
     const token = localStorage.getItem("localcashToken");
-    console.log(token);
     if (token !== null) {
-        localStorageToken.value = false;
+        localStorageToken.value = true;
     }
+
+    // Abhören ob sich jemand einloggt (Nicht über den Header)
+    window.addEventListener('tocken-localstorage-changed', (event) => {
+        if (token !== null) {
+            localStorageToken.value = true;
+        }
+    });
+
 });
 
-const login = () => {
+const login = async () => {
     const email = document.getElementById('DropdownFormEmail').value;
     const password = document.getElementById('DropdownFormPassword').value;
 
     const path = 'http://localhost:3000/auth/login';
 
-    const tocken = ApiService.post(path, { email, password });
-    console.log(tocken.value);
-
-    if (tocken.value === null) {
+    try {
+        const response = await axios.post(path, { "email": email, "password": password });
+        const tocken = response.data.token;
+        localStorage.setItem("localcashToken", tocken);
+        localStorageToken.value = true;
+        document.getElementById('DropdownFormEmail').value = '';
+        document.getElementById('DropdownFormPassword').value = '';
+    } catch (error) {
         alert('Login fehlgeschlagen');
         return;
     }
-
-    localStorage.setItem("localcashToken", tocken.value);
-    localStorageToken.value = true;
 }
 
 const logout = () => {

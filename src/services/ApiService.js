@@ -9,6 +9,7 @@ export default {
             return data;
         } catch (error) {
             console.error('API request failed', error);
+            return null;
         }
     },
 

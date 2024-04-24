@@ -5,8 +5,8 @@
                 <h1>Sign Up</h1>
                 <form @submit.prevent="signUp">
                     <div class="mb-3">
-                        <label for="FormEmail" class="form-label">Benutzernamen</label>
-                        <input type="text" class="form-control" id="FormEmail" placeholder="">
+                        <label for="FormUsername" class="form-label">Benutzernamen</label>
+                        <input type="text" class="form-control" id="FormUsername" placeholder="">
                     </div>
                     <div class="mb-3">
                         <label for="FormEmail" class="form-label">Email Adresse</label>
@@ -24,28 +24,71 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-import ApiService from '@/services/ApiService';
+const router = useRouter();
 
-const signUp = () => {
+const signUp = async () => {
 
-    const username = document.getElementById('FormEmail').value;
+    const username = document.getElementById('FormUsername').value;
     const email = document.getElementById('FormEmail').value;
     const password = document.getElementById('FormPassword').value;
 
-    const path = 'http://localhost:3000/auth/register';
+    if (username === '' || email === '' || password === '') {
+        alert('Bitte alle Felder ausfüllen');
+        return;
+    }
 
-    const response = ApiService.post(path, { username, email, password });
+    let path = 'http://localhost:3000/auth/register';
 
-    if (response.value === null) {
+    try {
+        await axios.post(path, { username, email, password });
+    } catch (error) {
+        if (error.response.status === 400) {
+            alert('Email oder/und Benutzernamen bereits registriert');
+            return;
+        }
         alert('Sign Up fehlgeschlagen');
         return;
     }
 
-    console.log(response.value);
 
-    localStorage.setItem("localcashToken", response.value);
+    // Login
+    path = 'http://localhost:3000/auth/login';
+
+    try {
+        let response = await axios.post(path, { email, password });
+        response = response.data;
+        localStorage.setItem("localcashToken", response.token);
+
+        // Event meldung an Header
+        window.dispatchEvent(new CustomEvent('tocken-localstorage-changed', {
+            detail: {
+                "loggin": true,
+            }
+        }));
+
+        router.push('/');
+    } catch (error) {
+        alert('Login fehlgeschlagen');
+        console.log(error);
+        return;
+    }
 
 }
+
+
+onMounted(() => {
+    const token = localStorage.getItem("localcashToken");
+    if (token !== null) {
+        router.push('/');
+    }
+
+    document.getElementById('FormUsername').value = '';
+    document.getElementById('FormEmail').value = '';
+    document.getElementById('FormPassword').value = '';
+});
 
 </script>
