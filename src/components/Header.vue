@@ -29,32 +29,37 @@
                         </router-link>
                     </li>
                     <li>
-                        <div class="dropdown dropdown-toggle nav-link text-white" data-bs-toggle="dropdown"
-                            aria-expanded="false">
+                        <div v-if="!localStorageToken" class="dropdown dropdown-toggle nav-link text-white"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             <div class="text-center">
                                 <i class="bi bi-person-circle" style="font-size: 24px;"></i>
                             </div>
                             User
-                            <ul v-if="!localStorageToken" class="dropdown-menu text-small">
-                                <form class="px-4 py-3" style="min-width: 400px;">
-                                    <div class="mb-3">
-                                        <label for="DropdownFormEmail" class="form-label">Email address</label>
-                                        <input type="email" class="form-control" id="DropdownFormEmail"
-                                            placeholder="email@example.com">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="DropdownFormPassword" class="form-label">Password</label>
-                                        <input type="password" class="form-control" id="DropdownFormPassword"
-                                            placeholder="Password">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Sign in</button>
-                                </form>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">Neu hier? Sign up</a>
-                                <!--TODO: Erstelle Sing up Page-->
-                            </ul>
-                            <button v-else @click="logout" class="dropdown-item">Logout</button>
                         </div>
+                        <button v-else class="nav-link text-white" @click="logout">
+                            <div class="text-center">
+                                <i class="bi bi-person-circle" style="font-size: 24px;"></i>
+                            </div>
+                            Logout
+                        </button>
+                        <ul class="dropdown-menu text-small">
+                            <form class="px-4 py-3" style="min-width: 400px;" @submit.prevent="login">
+                                <div class="mb-3">
+                                    <label for="DropdownFormEmail" class="form-label">Email address</label>
+                                    <input type="text" class="form-control" id="DropdownFormEmail"
+                                        placeholder="email@example.com">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="DropdownFormPassword" class="form-label">Password</label>
+                                    <input type="password" class="form-control" id="DropdownFormPassword"
+                                        placeholder="Password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Sign in</button>
+                            </form>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Neu hier? Sign up</a>
+                            <!--TODO: Erstelle Sing up Page-->
+                        </ul>
                     </li>
                 </ul>
             </div>
