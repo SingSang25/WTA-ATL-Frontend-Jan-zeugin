@@ -29,13 +29,13 @@
                         </router-link>
                     </li>
                     <li>
-                        <div v-if="!localStorageToken" class="dropdown text-center">
-                            <a href="#" class="d-block link-body-emphasis dropdown-toggle" data-bs-toggle="dropdown"
-                                aria-expanded="false">
+                        <div class="dropdown dropdown-toggle nav-link text-white" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <div class="text-center">
                                 <i class="bi bi-person-circle" style="font-size: 24px;"></i>
-                                User
-                            </a>
-                            <ul class="dropdown-menu text-small">
+                            </div>
+                            User
+                            <ul v-if="!localStorageToken" class="dropdown-menu text-small">
                                 <form class="px-4 py-3" style="min-width: 400px;">
                                     <div class="mb-3">
                                         <label for="DropdownFormEmail" class="form-label">Email address</label>
@@ -53,8 +53,8 @@
                                 <a class="dropdown-item" href="#">Neu hier? Sign up</a>
                                 <!--TODO: Erstelle Sing up Page-->
                             </ul>
+                            <button v-else @click="logout" class="dropdown-item">Logout</button>
                         </div>
-                        <button v-else @click="logout" class="dropdown-item">Logout</button>
                     </li>
                 </ul>
             </div>
