@@ -70,7 +70,9 @@
 
 import { onMounted } from 'vue';
 import axios from 'axios';
+
 import { localStorageToken, isAdmin, updateVariable } from '../services/headerUserManagment.js';
+import { router } from '../router/index.js';
 
 onMounted(() => {
     updateVariable();

@@ -27,7 +27,7 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import { isAdmin, updateVariable } from '../services/headerUserManagment.js';
+import { updateVariable } from '../services/headerUserManagment.js';
 
 const router = useRouter();
 
@@ -43,33 +43,33 @@ const signUp = async () => {
     }
 
     let path = 'http://localhost:3000/auth/register';
-
+    let errorData = false;
     await axios.post(path, { username, email, password }).catch(error => {
         console.error('Error fetching users:', error);
         if (error.response.status === 400) {
+            errorData = true;
             alert('Email oder/und Benutzernamen bereits registriert');
             return;
         }
         alert('Sign Up fehlgeschlagen');
-        return;
     });
 
-    // Login
-    path = 'http://localhost:3000/auth/login';
+    if (!errorData) {
+        const path = 'http://localhost:3000/auth/login';
+        await axios.post(path, { email, password })
+            .then(response => {
+                response = response.data;
+                localStorage.setItem("localcashToken", response.token);
+                updateVariable();
 
-    await axios.post(path, { email, password })
-        .then(response => {
-            response = response.data;
-            localStorage.setItem("localcashToken", response.token);
-            updateVariable();
-
-            router.push('/');
-        })
-        .catch(error => {
-            console.error('Error fetching users:', error);
-            alert('Login fehlgeschlagen');
-        });
-}
+                router.push('/');
+            })
+            .catch(error => {
+                console.error('Error fetching users:', error);
+                alert('Login fehlgeschlagen');
+            });
+    }
+};
 
 
 onMounted(() => {
