@@ -28,8 +28,8 @@
                     </td>
                     <td style="min-width: 80px;">
                         <button @click="editUser(index)" class="btn btn-primary w-100">{{
-                    user.editing ? 'Save' : 'Edit'
-                }}</button>
+                            user.editing ? 'Save' : 'Edit'
+                            }}</button>
                     </td>
                 </tr>
             </tbody>
@@ -42,23 +42,23 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import { isAdmin } from '../services/headerUserManagment.js';
 
 const users = ref([]);
-const isAdmin = ref(false);
+const isEditing = ref(false);
 
 onMounted(async () => {
+    if (!isAdmin.value) {
+        alert('You are not authorized to access this page');
+        router.push('/');
+        return;
+    } 
+
     let path = 'http://localhost:3000/users';
     const response = await axios.get(path);
     users.value = response.data;
 
-    path = 'http://localhost:3000/users/me';
-    const loginUser = await axios.get(path);
-    isAdmin = loginUser.data.isAdmin;
-
-    console.log(loginUser);
 });
-
-const isEditing = ref(false);
 
 function editUser(index) {
     users.value[index].editing = !users.value[index].editing;

@@ -68,27 +68,12 @@
 
 <script setup>
 
-import { ref, onMounted } from 'vue';
+import { onMounted } from 'vue';
 import axios from 'axios';
-
-let localStorageToken = ref(false)
-const isAdmin = ref(false);
+import { localStorageToken, isAdmin, updateVariable } from '../services/headerUserManagment.js';
 
 onMounted(() => {
-    const token = localStorage.getItem("localcashToken");
-    if (token !== null) {
-        localStorageToken.value = true;
-        isAdmin.value = getAdmin();
-    }
-
-    // Abhören ob sich jemand einloggt (Nicht über den Header)
-    window.addEventListener('tocken-localstorage-changed', (event) => {
-        if (token !== null) {
-            localStorageToken.value = true;
-            isAdmin.value = getAdmin();
-        }
-    });
-
+    updateVariable();
 });
 
 const login = async () => {
@@ -101,7 +86,7 @@ const login = async () => {
         const response = await axios.post(path, { "email": email, "password": password });
         const tocken = response.data.token;
         localStorage.setItem("localcashToken", tocken);
-        localStorageToken.value = true;
+        updateVariable();
         document.getElementById('DropdownFormEmail').value = '';
         document.getElementById('DropdownFormPassword').value = '';
     } catch (error) {
@@ -112,33 +97,8 @@ const login = async () => {
 
 const logout = () => {
     localStorage.removeItem("localcashToken");
-    localStorageToken.value = false;
-}
-
-const getAdmin = () => {
-    const token = localStorage.getItem("localcashToken");
-
-    if (!token) {
-        return false;
-    }
-
-    const decodedToken = parseJwt(token);
-
-    return !!(decodedToken && decodedToken.isAdmin === true);
-}
-
-function parseJwt(token) {
-    try {
-        const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join(''));
-
-        return JSON.parse(jsonPayload);
-    } catch (e) {
-        return null;
-    }
+    updateVariable();
+    router.push('/');
 }
 
 </script>

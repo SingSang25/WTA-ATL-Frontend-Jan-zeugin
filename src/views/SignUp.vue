@@ -27,6 +27,7 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { isAdmin, updateVariable } from '../services/headerUserManagment.js';
 
 const router = useRouter();
 
@@ -60,13 +61,7 @@ const signUp = async () => {
         .then(response => {
             response = response.data;
             localStorage.setItem("localcashToken", response.token);
-
-            // Event meldung an Header
-            window.dispatchEvent(new CustomEvent('tocken-localstorage-changed', {
-                detail: {
-                    "loggin": true,
-                }
-            }));
+            updateVariable();
 
             router.push('/');
         })
