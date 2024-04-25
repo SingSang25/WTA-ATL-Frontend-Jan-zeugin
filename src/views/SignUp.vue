@@ -43,40 +43,37 @@ const signUp = async () => {
 
     let path = 'http://localhost:3000/auth/register';
 
-    try {
-        await axios.post(path, { username, email, password });
-    } catch (error) {
+    await axios.post(path, { username, email, password }).catch(error => {
+        console.error('Error fetching users:', error);
         if (error.response.status === 400) {
             alert('Email oder/und Benutzernamen bereits registriert');
             return;
         }
         alert('Sign Up fehlgeschlagen');
         return;
-    }
-
+    });
 
     // Login
     path = 'http://localhost:3000/auth/login';
 
-    try {
-        let response = await axios.post(path, { email, password });
-        response = response.data;
-        localStorage.setItem("localcashToken", response.token);
+    await axios.post(path, { email, password })
+        .then(response => {
+            response = response.data;
+            localStorage.setItem("localcashToken", response.token);
 
-        // Event meldung an Header
-        window.dispatchEvent(new CustomEvent('tocken-localstorage-changed', {
-            detail: {
-                "loggin": true,
-            }
-        }));
+            // Event meldung an Header
+            window.dispatchEvent(new CustomEvent('tocken-localstorage-changed', {
+                detail: {
+                    "loggin": true,
+                }
+            }));
 
-        router.push('/');
-    } catch (error) {
-        alert('Login fehlgeschlagen');
-        console.log(error);
-        return;
-    }
-
+            router.push('/');
+        })
+        .catch(error => {
+            console.error('Error fetching users:', error);
+            alert('Login fehlgeschlagen');
+        });
 }
 
 
@@ -92,15 +89,3 @@ onMounted(() => {
 });
 
 </script>
-
-
-
-// TODO: Addit axios to package.json
-
-//axios.get(this.apiUrl)
-//.then(response => {
-// this.users = response.data;
-//})
-//.catch(error => {
-// console.error('Error fetching users:', error);
-//});

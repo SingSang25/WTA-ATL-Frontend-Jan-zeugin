@@ -20,7 +20,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/Settings"
+                        <router-link v-if="isAdmin" to="/Settings"
                             :class="{ 'nav-link': true, 'text-secondary': $route.path === '/Settings', 'text-white': $route.path !== '/Settings' }">
                             <div class="text-center">
                                 <i class="bi bi-sliders" style="font-size: 24px;"></i>
@@ -72,18 +72,20 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 
 let localStorageToken = ref(false)
-const Token = ref(localStorage.getItem("localcashToken") !== null);
+const isAdmin = ref(false);
 
 onMounted(() => {
     const token = localStorage.getItem("localcashToken");
     if (token !== null) {
         localStorageToken.value = true;
+        isAdmin.value = getAdmin();
     }
 
     // Abhören ob sich jemand einloggt (Nicht über den Header)
     window.addEventListener('tocken-localstorage-changed', (event) => {
         if (token !== null) {
             localStorageToken.value = true;
+            isAdmin.value = getAdmin();
         }
     });
 
@@ -111,6 +113,32 @@ const login = async () => {
 const logout = () => {
     localStorage.removeItem("localcashToken");
     localStorageToken.value = false;
+}
+
+const getAdmin = () => {
+    const token = localStorage.getItem("localcashToken");
+
+    if (!token) {
+        return false;
+    }
+
+    const decodedToken = parseJwt(token);
+
+    return !!(decodedToken && decodedToken.isAdmin === true);
+}
+
+function parseJwt(token) {
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        return JSON.parse(jsonPayload);
+    } catch (e) {
+        return null;
+    }
 }
 
 </script>
