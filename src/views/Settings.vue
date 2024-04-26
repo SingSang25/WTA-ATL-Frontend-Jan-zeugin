@@ -29,7 +29,7 @@
                     <td style="min-width: 80px;">
                         <button @click="editUser(index)" class="btn btn-primary w-100">{{
                             user.editing ? 'Save' : 'Edit'
-                            }}</button>
+                        }}</button>
                     </td>
                 </tr>
             </tbody>
@@ -52,7 +52,7 @@ onMounted(async () => {
         alert('You are not authorized to access this page');
         router.push('/');
         return;
-    } 
+    }
 
     let path = 'http://localhost:3000/users';
     const response = await axios.get(path);

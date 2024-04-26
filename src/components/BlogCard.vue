@@ -15,6 +15,4 @@
 
 <script setup>
 
-
-
 </script>

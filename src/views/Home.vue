@@ -1,9 +1,15 @@
 <template>
-    <BlogCard />
-    <button type="button" class="btn btn-outline-light container">Erstelle Blog</button>
+    <button v-if="isAdmin" @click="createBlog" type="button" class="btn btn-outline-light container">Erstelle
+        Blog</button>
 </template>
 
 <script setup>
-import BlogCard from '@/components/BlogCard.vue';
+import { router } from '@/router/index.js';
+import { isAdmin } from '../services/headerUserManagment.js';
+
+
+const createBlog = () => {
+    router.push('/editblog');
+}
 
 </script>
