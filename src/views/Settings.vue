@@ -106,6 +106,7 @@ async function saveUser(index) {
     isEditing.value = users.value.some(user => user.editing);
     // Beispiel: Aufruf einer API zum Speichern des Benutzers
     await axios.put(`http://localhost:3000/users/${users.value[index].id}`, users.value[index]);
+    fetchData();
 }
 
 function cancelEdit(index) {
@@ -128,7 +129,6 @@ async function addUser() {
     }
 
     const emailPattern = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/;
-    console.log(newUser.value.email);
     if (!emailPattern.test(newUser.value.email)) {
         alert('Bitte eine gültige E-Mail-Adresse eingeben');
         return;
