@@ -124,6 +124,7 @@ async function deleteUser(index) {
     const userId = users.value[index].id;
     await axios.delete(`http://localhost:3000/users/${userId}`);
     users.value.splice(index, 1);
+    fetchData();
 }
 
 async function addUser() {
