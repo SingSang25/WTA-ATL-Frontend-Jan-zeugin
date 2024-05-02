@@ -38,7 +38,6 @@ const signUp = async () => {
     const password = document.getElementById('FormPassword').value;
 
     if (username === '' || email === '' || password === '') {
-        alert('Bitte alle Felder ausfüllen');
         return;
     }
 
@@ -47,10 +46,8 @@ const signUp = async () => {
     await axios.post(path, { username, email, password }).catch(error => {
         if (error.response.status === 400) {
             errorData = true;
-            alert('Email oder/und Benutzernamen bereits registriert');
             return;
         }
-        alert('Sign Up fehlgeschlagen');
     });
 
     if (!errorData) {
@@ -62,9 +59,6 @@ const signUp = async () => {
                 updateVariable();
 
                 router.push('/');
-            })
-            .catch(error => {
-                alert('Login fehlgeschlagen');
             });
     }
 };

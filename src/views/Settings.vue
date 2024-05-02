@@ -101,10 +101,14 @@ function editUser(index) {
 }
 
 async function saveUser(index) {
-    // Logik zum Speichern des Benutzers hier implementieren
+
+    if (!isMail(users.value[index].email)) {
+        alert('Bitte eine gültige E-Mail-Adresse eingeben');
+        return;
+    }
+
     users.value[index].editing = false;
     isEditing.value = users.value.some(user => user.editing);
-    // Beispiel: Aufruf einer API zum Speichern des Benutzers
     await axios.put(`http://localhost:3000/users/${users.value[index].id}`, users.value[index]);
     fetchData();
 }
@@ -128,8 +132,7 @@ async function addUser() {
         return;
     }
 
-    const emailPattern = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!emailPattern.test(newUser.value.email)) {
+    if (!isMail(newUser.value.email)) {
         alert('Bitte eine gültige E-Mail-Adresse eingeben');
         return;
     }
@@ -143,5 +146,10 @@ async function addUser() {
         password: '',
         isAdmin: false,
     };
+}
+
+const isMail = (email) => {
+    const emailPattern = /^[a-zA-Z0–9._-]+@[a-zA-Z0–9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
 }
 </script>
