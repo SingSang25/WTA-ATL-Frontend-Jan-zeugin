@@ -9,7 +9,7 @@ import { isAdmin } from '../services/headerUserManagment.js';
 
 
 const createBlog = () => {
-    router.push('/editblog');
+    router.push('/blog');
 }
 
 </script>

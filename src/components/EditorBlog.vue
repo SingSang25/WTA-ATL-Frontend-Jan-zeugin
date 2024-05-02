@@ -10,8 +10,6 @@ const props = defineProps(['data'])
 
 EDITOR_JS_TOOLS.data = props.data;
 
-console.log(EDITOR_JS_TOOLS.data);
-
-const editor = new EditorJS(data);
+const editor = new EditorJS(EDITOR_JS_TOOLS);
 
 </script>

@@ -13,7 +13,7 @@ import Delimiter from '@editorjs/delimiter';
 import InlineCode from '@editorjs/inline-code';
 import SimpleImage from '@editorjs/simple-image';
 import NestedList from '@editorjs/nested-list';
-import { readonly } from 'vue';
+
 // import AttachesTool from '@editorjs/attaches';
 // const AnyButton = require('editorjs-button');
 
@@ -32,9 +32,10 @@ export const EDITOR_JS_TOOLS = {
         raw: Raw,
         header: {
             class: Header,
+            inlineToolbar: ['link'],
             config: {
                 placeholder: 'Enter a header',
-                levels: [1, 2, 3, 4, 5, 6],
+                levels: [2, 3, 4, 5, 6],
                 defaultLevel: 3,
             },
         },

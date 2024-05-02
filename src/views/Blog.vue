@@ -6,13 +6,14 @@
         <EditorBlog :data=data />
     </div>
     <div v-else>
-        <h1>Preview</h1>
+        <ShowBlog :data=data />
     </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import EditorBlog from '@/components/EditorBlog.vue';
+import ShowBlog from '@/components/ShowBlog.vue';
 
 const isEditMode = ref(false);
 
