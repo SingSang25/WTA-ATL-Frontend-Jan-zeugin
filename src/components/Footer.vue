@@ -15,7 +15,7 @@
                 <li class="nav-item">
                     <router-link to="/" class="nav-link px-2 text-body-secondary">Home</router-link>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" v-if="isAdmin">
                     <router-link to="/Settings" class="nav-link px-2 text-body-secondary">Einstellungen</router-link>
                 </li>
             </ul>
@@ -23,3 +23,9 @@
         </div>
     </div>
 </template>
+
+<script setup>
+
+import { isAdmin } from '../services/headerUserManagment.js';
+
+</script>

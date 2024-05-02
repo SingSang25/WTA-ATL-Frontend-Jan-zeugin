@@ -87,8 +87,7 @@ async function fetchData() {
 
 onMounted(async () => {
     if (!isAdmin.value) {
-        alert('You are not authorized to access this page');
-        router.push('/');
+        router.push('/'); // BUG: geht nicht, jedoch ist die gleiche Konstelation in SignUp.vue möglich
         return;
     }
 
