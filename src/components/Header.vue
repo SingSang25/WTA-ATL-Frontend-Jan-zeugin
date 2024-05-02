@@ -92,7 +92,6 @@ const login = async () => {
         document.getElementById('DropdownFormEmail').value = '';
         document.getElementById('DropdownFormPassword').value = '';
     } catch (error) {
-        alert('Login fehlgeschlagen');
         return;
     }
 }

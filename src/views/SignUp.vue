@@ -38,20 +38,16 @@ const signUp = async () => {
     const password = document.getElementById('FormPassword').value;
 
     if (username === '' || email === '' || password === '') {
-        alert('Bitte alle Felder ausfüllen');
         return;
     }
 
     let path = 'http://localhost:3000/auth/register';
     let errorData = false;
     await axios.post(path, { username, email, password }).catch(error => {
-        console.error('Error fetching users:', error);
         if (error.response.status === 400) {
             errorData = true;
-            alert('Email oder/und Benutzernamen bereits registriert');
             return;
         }
-        alert('Sign Up fehlgeschlagen');
     });
 
     if (!errorData) {
@@ -63,10 +59,6 @@ const signUp = async () => {
                 updateVariable();
 
                 router.push('/');
-            })
-            .catch(error => {
-                console.error('Error fetching users:', error);
-                alert('Login fehlgeschlagen');
             });
     }
 };

@@ -5,6 +5,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 
 import HeaderVue from '@/components/Header.vue'
 import FooterVue from '@/components/Footer.vue'
+import AlertComponent from '@/components/Alert.vue'
 
 </script>
 
@@ -13,7 +14,10 @@ import FooterVue from '@/components/Footer.vue'
     <HeaderVue />
   </header>
 
-  <main class="container mt-5"><router-view /></main>
+  <main class="container mt-5">
+    <alert-component />
+    <router-view />
+  </main>
 
   <footer>
     <FooterVue />
