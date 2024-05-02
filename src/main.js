@@ -12,6 +12,16 @@ axios.interceptors.request.use(async function (config) {
     return config;
 });
 
+axios.interceptors.response.use(function (response) {
+    return response;
+}, function (error) {
+    if (error.response.status === 401) {
+        localStorage.removeItem('localcashToken');
+        router.push('/');
+    }
+    alert(error.response.data);
+});
+
 const app = createApp(App)
 app.use(router)
 app.mount('#app')
