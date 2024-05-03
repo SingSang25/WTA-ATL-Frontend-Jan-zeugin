@@ -1,0 +1,59 @@
+#editorjs .cdx-block,
+#editorjs .ce-header,
+#editorjs .inlineToolButton,
+#editorjs .ce-toolbar__plus,
+#editorjs .ce-toolbar__settings-btn,
+#editorjs .ce-popover__search {
+  color: var(--bs-body-color);
+}
+
+#editorjs .ce-popover,
+#editorjs .ce-popover-item,
+#editorjs .ce-popover-item__icon,
+#editorjs .ce-popover-items,
+#editorjs .ce-inline-toolbar,
+#editorjs .ce-inline-tool,
+#editorjs .ce-conversion-tool,
+#editorjs .ce-conversion-tool__icon,
+#editorjs .ce-inline-toolbar__dropdown,
+#editorjs .ce-conversion-toolbar {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-body-color);
+  border: none;
+}
+
+#editorjs .ce-toolbar__plus:hover,
+#editorjs .ce-toolbar__settings-btn:hover {
+  background-color: var(--bs-secondary-bg);
+}
+
+#editorjs .ce-popover-item:hover,
+#editorjs .ce-inline-tool:hover,
+#editorjs .ce-inline-toolbar__dropdown:hover,
+#editorjs .ce-conversion-tool:hover {
+  background-color: var(--bs-border-color);
+}
+
+#editorjs .cdx-search-field,
+#editorjs .cdx-search-field__input {
+  background-color: var(--bs-body-color);
+  color: var(--bs-body-bg);
+  border: none;
+}
+
+#editorjs .inline-code {
+  background-color: var(--bs-danger-bg-subtle);
+  color: var(--bs-danger-text-emphasis);
+}
+
+#editorjs .cdx-marker {
+  background-color: var(--bs-warning-bg-subtle);
+  color: var(--bs-warning-text-emphasis);
+}
+
+#editorjs .ce-popover-item *::selection,
+#editorjs .cdx-block *::selection,
+#editorjs .ce-block .ce-block__content *::selection,
+#editorjs .ce-block.ce-block--selected .ce-block__content {
+  background-color: var(--bs-border-color);
+}

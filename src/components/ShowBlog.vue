@@ -1,5 +1,5 @@
 <template>
-    <div class="card m-4">
+    <div id="editorjs" class="card m-4">
         <div v-for="parsed in parsedHtml">
             <div v-if="getClass(parsed)" class="card-header">
                 <div v-html="parsed"></div>
