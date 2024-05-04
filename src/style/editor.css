@@ -1,9 +1,14 @@
+#editorjs ::before,
 #editorjs .cdx-block,
 #editorjs .ce-header,
 #editorjs .inlineToolButton,
 #editorjs .ce-toolbar__plus,
 #editorjs .ce-toolbar__settings-btn,
-#editorjs .ce-popover__search {
+#editorjs .ce-popover__search,
+#editorjs .tc-add-row,
+#editorjs .tc-toolbox,
+#editorjs .tc-toolbox__toggler,
+#editorjs .tc-add-column {
   color: var(--bs-body-color);
 }
 
@@ -16,21 +21,34 @@
 #editorjs .ce-conversion-tool,
 #editorjs .ce-conversion-tool__icon,
 #editorjs .ce-inline-toolbar__dropdown,
-#editorjs .ce-conversion-toolbar {
+#editorjs .ce-conversion-toolbar,
+#editorjs .cdx-input,
+#editorjs .tc-popover,
+#editorjs .tc-popover__item {
   background-color: var(--bs-secondary-bg);
   color: var(--bs-body-color);
   border: none;
 }
 
+#editorjs .tc-popover__item-icon {
+  background-color: var(--bs-secondary-bg);
+  color: var(--bs-body-color);
+}
+
 #editorjs .ce-toolbar__plus:hover,
-#editorjs .ce-toolbar__settings-btn:hover {
+#editorjs .ce-toolbar__settings-btn:hover,
+#editorjs .tc-add-row:hover,
+#editorjs .tc-add-row:hover::before,
+#editorjs .tc-toolbox:hover {
   background-color: var(--bs-secondary-bg);
 }
 
 #editorjs .ce-popover-item:hover,
 #editorjs .ce-inline-tool:hover,
 #editorjs .ce-inline-toolbar__dropdown:hover,
-#editorjs .ce-conversion-tool:hover {
+#editorjs .ce-conversion-tool:hover,
+#editorjs .tc-add-column:hover,
+#editorjs .tc-popover__item:hover {
   background-color: var(--bs-border-color);
 }
 
@@ -54,6 +72,10 @@
 #editorjs .ce-popover-item *::selection,
 #editorjs .cdx-block *::selection,
 #editorjs .ce-block .ce-block__content *::selection,
-#editorjs .ce-block.ce-block--selected .ce-block__content {
+#editorjs .ce-block.ce-block--selected .ce-block__content,
+#editorjs .tc-cell--selected,
+#editorjs .tc-row--selected,
+#editorjs .tc-cell--selected::after,
+#editorjs .tc-row--selected::after {
   background-color: var(--bs-border-color);
 }
