@@ -10,6 +10,8 @@ const routes = [
     { path: '/settings', component: Settings },
     { path: '/signup', component: SignUpm },
     { path: '/blog', component: Blog },
+    { path: '/blog/:id', component: Blog },
+    { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 
 const router = createRouter({
