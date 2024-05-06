@@ -8,7 +8,7 @@
         </div>
         <div class="card-footer text-body-secondary">
             <div v-if="blog.lastUpdate !== blog.createBlog">
-                Letztes Update: {{ }}
+                Letztes Update: {{ blog.lastUpdate }}
             </div>
             <div v-else>
                 Erstellt am: {{ blog.createBlog }}
