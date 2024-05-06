@@ -1,9 +1,14 @@
 <template>
-    <button class="btn btn-primary container" @click="toggleEditMode">
-        {{ isEditMode ? 'Gehe zur Vorschau' : 'Gehe zum Edit' }}
-    </button>
+    <div class="btn-group p-4 ">
+        <button class="btn btn-outline-primary" @click="toggleEditMode">
+            {{ isEditMode ? 'Gehe zur Vorschau' : 'Gehe zum Edit' }}
+        </button>
+        <button type="button" class="btn btn-outline-success" @click="saveData">Speichern</button>
+        <button type="button" class="btn btn-outline-warning" @click="cancelData">Abbrechen</button>
+    </div>
+
     <div v-if="isEditMode">
-        <EditorBlog :data=data />
+        <EditorBlog :data=data @changeData="getData" />
     </div>
     <div v-else>
         <ShowBlog :data=data />
@@ -12,13 +17,15 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 import EditorBlog from '@/components/EditorBlog.vue';
 import ShowBlog from '@/components/ShowBlog.vue';
 
+const router = useRouter();
 const isEditMode = ref(false);
 
-// TODO: Replace this with the actual data from the API
-const data = ref({
+let data = ref({
     id: "1",
     time: 1635603431943,
     blocks: [
@@ -129,6 +136,22 @@ const data = ref({
         }
     ]
 });
+
+const getData = (newData) => {
+    data = newData;
+    console.log(data);
+}
+
+const saveData = () => {
+    axios.post(`http://localhost:3000/blogs/`, data.value)
+        .then(() => {
+            router.push('/');
+        });
+}
+
+const cancelData = () => {
+    router.push('/');
+}
 
 const toggleEditMode = () => {
     if (isEditMode.value) {

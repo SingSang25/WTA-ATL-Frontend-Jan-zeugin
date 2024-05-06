@@ -62,9 +62,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { isAdmin } from '../services/headerUserManagment.js';
 
+const router = useRouter();
 const users = ref([]);
 const isEditing = ref(false);
 
@@ -83,7 +85,7 @@ async function fetchData() {
 
 onMounted(async () => {
     if (!isAdmin.value) {
-        router.push('/'); // BUG: geht nicht, jedoch ist die gleiche Konstelation in SignUp.vue möglich
+        router.push('/');
         return;
     }
 
