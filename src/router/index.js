@@ -9,8 +9,8 @@ const routes = [
     { path: '/', component: Home },
     { path: '/settings', component: Settings },
     { path: '/signup', component: SignUpm },
-    { path: '/blog', component: Blog },
-    { path: '/blog/:id', component: Blog },
+    { path: '/blogs', component: Blog },
+    { path: '/blogs/:id', component: Blog },
     { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 

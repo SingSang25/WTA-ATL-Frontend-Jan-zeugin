@@ -14,7 +14,7 @@ import BlogCard from '@/components/blog/BlogCard.vue';
 const blogs = ref();
 
 const createBlog = () => {
-    router.push('/blog');
+    router.push('/blogs');
 }
 
 onMounted(() => {

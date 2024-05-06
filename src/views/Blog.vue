@@ -42,7 +42,6 @@ const data = ref({
 });
 
 const getTitle = (newTitle) => {
-    console.log(newTitle);
     title.value = newTitle;
 }
 
@@ -76,7 +75,7 @@ const toggleEditMode = () => {
 onMounted(() => {
 
     if (router.currentRoute.value.params.id) {
-        axios.get(`http://localhost:3000/blog/${router.currentRoute.value.params.id}`)
+        axios.get(`http://localhost:3000/blogs/${router.currentRoute.value.params.id}`)
             .then((response) => {
                 data.value.id = response.data.id;
                 data.value.time = response.data.lastUpdated;

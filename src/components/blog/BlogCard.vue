@@ -20,7 +20,7 @@
 
 <script setup>
 
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps(['blog']);
 
@@ -30,10 +30,6 @@ const blog = ref({
     lastUpdate: props.blog.lastUpdate,
     createBlog: props.blog.createBlog,
     user: props.blog.user.username
-});
-
-onMounted(() => {
-    console.log(props.blog);
 });
 
 </script>

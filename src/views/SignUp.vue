@@ -43,16 +43,18 @@ const signUp = async () => {
 
     let path = 'http://localhost:3000/auth/register';
     let errorData = false;
-    await axios.post(path, { username, email, password }).catch(error => {
-        if (error.response.status === 400) {
-            errorData = true;
-            return;
-        }
-    });
+    await axios
+        .post(path, { username, email, password })
+        .catch(error => {
+            if (error.response.status === 400) {
+                errorData = true;
+            }
+        });
 
     if (!errorData) {
         const path = 'http://localhost:3000/auth/login';
-        await axios.post(path, { email, password })
+        await axios
+            .post(path, { email, password })
             .then(response => {
                 response = response.data;
                 localStorage.setItem("localcashToken", response.token);
