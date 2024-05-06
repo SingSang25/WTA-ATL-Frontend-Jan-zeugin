@@ -51,6 +51,7 @@ const getData = (newData) => {
 }
 
 const saveData = () => {
+    data.value.title = title.value;
     axios.post(`http://localhost:3000/blogs/`, data.value)
         .then(() => {
             router.push('/');
