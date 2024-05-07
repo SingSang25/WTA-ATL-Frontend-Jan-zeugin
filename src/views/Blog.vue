@@ -10,7 +10,7 @@
     <div v-if="isEditMode">
         <EditorBlog :data=data :title=title @changeData="getData" @updateTitle="getTitle" />
     </div>
-    <div v-else-if="data.blocks.length > 1">
+    <div v-else-if="data.blocks.length > 0 || title.length > 0">
         <ShowBlog :data=data :title=title />
     </div>
     <div v-else>

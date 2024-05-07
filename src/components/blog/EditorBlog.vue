@@ -1,6 +1,11 @@
 <template>
-    <input type="text" class="form-control" id="title" v-model="title" @input="updateTitle">
+    <form iv class="form-floating m-4">
+        <input type="text" class="form-control form-control-lg" id="title" v-model="title" @input="updateTitle">
+        <label for="title">Überschrift des Blogs</label>
+    </form>
+
     <div id="editorjs"></div>
+
 </template>
 
 <script setup>
