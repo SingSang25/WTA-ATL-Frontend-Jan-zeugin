@@ -4,7 +4,7 @@
             <h3 class="card-title">{{ blog.title }}</h3>
         </div>
         <div class="card-body">
-            <button type="button" class="btn btn-outline-light container">Zeige Blog</button>
+            <button type="button" class="btn btn-outline-light container" @click="showBlog">Zeige Blog</button>
         </div>
         <div class="card-footer text-body-secondary">
             <div v-if="blog.lastUpdate !== blog.createBlog">
@@ -21,6 +21,14 @@
 <script setup>
 
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const showBlog = () => {
+    const path = `/blogs/${blog.value.id}`;
+    router.push({ path });
+};
 
 const props = defineProps(['blog']);
 

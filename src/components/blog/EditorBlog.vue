@@ -1,10 +1,13 @@
 <template>
     <form iv class="form-floating m-4">
-        <input type="text" class="form-control form-control-lg" id="title" v-model="title" @input="updateTitle">
+        <input type="text" :class="['form-control', 'form-control-lg', { 'is-invalid': setinvalidTitle }]" id="title"
+            v-model="title" @input="updateTitle">
         <label for="title">Überschrift des Blogs</label>
     </form>
 
-    <div id="editorjs"></div>
+    <div :class="{ 'card border-danger': setinvalidEdit }">
+        <div id="editorjs"></div>
+    </div>
 
 </template>
 
@@ -13,7 +16,7 @@ import EditorJS from '@editorjs/editorjs';
 import { EDITOR_JS_TOOLS } from '../../services/editor/contants.js';
 import { AlertMessage } from '../../services/alertService.js';
 
-const props = defineProps(['data', 'title']);
+const props = defineProps(['data', 'title', 'setinvalidTitle', 'setinvalidEdit']);
 const emit = defineEmits(['changeData', 'updateTitle']);
 
 let title = props.title;
