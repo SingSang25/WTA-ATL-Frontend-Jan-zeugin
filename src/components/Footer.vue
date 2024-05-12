@@ -26,6 +26,6 @@
 
 <script setup>
 
-import { isAdmin } from '../services/headerUserManagment.js';
+import { isAdmin } from '@/services/headerUserManagment.js';
 
 </script>

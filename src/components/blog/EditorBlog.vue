@@ -13,8 +13,8 @@
 
 <script setup>
 import EditorJS from '@editorjs/editorjs';
-import { EDITOR_JS_TOOLS } from '../../services/editor/contants.js';
-import { AlertMessage } from '../../services/alertService.js';
+import { EDITOR_JS_TOOLS } from '@/services/editor/contants.js';
+import { AlertMessage } from '@/services/alertService.js';
 
 const props = defineProps(['data', 'title', 'setinvalidTitle', 'setinvalidEdit']);
 const emit = defineEmits(['changeData', 'updateTitle']);

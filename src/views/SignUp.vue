@@ -27,7 +27,7 @@
 import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import { updateVariable } from '../services/headerUserManagment.js';
+import { updateVariable } from '@/services/headerUserManagment.js';
 
 const router = useRouter();
 

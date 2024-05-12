@@ -6,7 +6,7 @@
 
 <script setup>
 import { router } from '@/router/index.js';
-import { isAdmin } from '../services/headerUserManagment.js';
+import { isAdmin } from '@/services/headerUserManagment.js';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import BlogCard from '@/components/blog/BlogCard.vue';

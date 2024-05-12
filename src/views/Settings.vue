@@ -64,7 +64,7 @@
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import { isAdmin } from '../services/headerUserManagment.js';
+import { isAdmin } from '@/services/headerUserManagment.js';
 
 const router = useRouter();
 const users = ref([]);

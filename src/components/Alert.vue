@@ -8,6 +8,6 @@
 
 <script setup>
 
-import { isAlert, AlertMessage, setAlert } from '../services/alertService';
+import { isAlert, AlertMessage, setAlert } from '@/services/alertService';
 
 </script>

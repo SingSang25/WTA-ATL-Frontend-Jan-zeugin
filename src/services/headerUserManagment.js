@@ -42,5 +42,17 @@ const updateVariable = () => {
     }
 };
 
-export { isAdmin, localStorageToken, updateVariable };
+const getUser = () => {
+    const token = localStorage.getItem("localcashToken");
+
+    if (!token) {
+        return false;
+    }
+
+    const decodedToken = parseJwt(token);
+
+    return decodedToken;
+};
+
+export { isAdmin, localStorageToken, updateVariable, getUser };
 
