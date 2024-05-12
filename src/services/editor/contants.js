@@ -1,35 +1,22 @@
 import Embed from '@editorjs/embed';
 import Table from '@editorjs/table';
 import Warning from '@editorjs/warning';
-import CodeTool from '@editorjs/code';
-import LinkTool from '@editorjs/link';
-import Image from '@editorjs/image';
-import Raw from '@editorjs/raw';
 import Header from '@editorjs/header';
 import Quote from '@editorjs/quote';
 import Marker from '@editorjs/marker';
 import CheckList from '@editorjs/checklist';
 import Delimiter from '@editorjs/delimiter';
-import InlineCode from '@editorjs/inline-code';
-import SimpleImage from '@editorjs/simple-image';
 import NestedList from '@editorjs/nested-list';
-
-// import AttachesTool from '@editorjs/attaches';
-// const AnyButton = require('editorjs-button');
 
 export const EDITOR_JS_TOOLS = {
     holder: 'editorjs',
     data: {},
     tools: {
         embed: Embed,
-        table: Table,
+        table: Table, // TODO: Show to configure
         marker: Marker,
         list: NestedList,
-        warning: Warning,
-        code: CodeTool,
-        linkTool: LinkTool,
-        image: Image,
-        raw: Raw,
+        warning: Warning, // TODO: Show to configure
         header: {
             class: Header,
             inlineToolbar: ['link'],
@@ -39,26 +26,9 @@ export const EDITOR_JS_TOOLS = {
                 defaultLevel: 3,
             },
         },
-        // AnyButton: {
-        //     class: AnyButton,
-        //     inlineToolbar: false,
-        //     config: {
-        //         css: {
-        //             btnColor: 'btn--gray',
-        //         },
-        //     },
-        // },
-        // attaches: {
-        //     class: AttachesTool,
-        //     config: {
-        //         //   endpoint: 'http://localhost:8008/uploadFile'
-        //     },
-        // },
         quote: Quote,
-        checklist: CheckList,
+        checklist: CheckList, // TODO: Show to configure
         delimiter: Delimiter,
-        inlineCode: InlineCode,
-        simpleImage: SimpleImage,
     },
     onChange: () => {
 

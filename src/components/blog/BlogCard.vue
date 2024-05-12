@@ -28,7 +28,7 @@
 
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import { isAdmin, getUser } from '@/services/headerUserManagment.js';
+import { isAdmin, username } from '@/services/headerUserManagment.js';
 import axios from 'axios';
 
 const isEdit = ref(false);
@@ -67,7 +67,7 @@ onMounted(() => {
         return;
     }
 
-    if (props.blog.user.username === getUser().username) {
+    if (props.blog.user.username === username) {
         isEdit.value = true;
         isRemove.value = true;
         return;

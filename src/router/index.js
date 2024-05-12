@@ -4,7 +4,7 @@ import Home from '@/views/Home.vue'
 import Settings from '@/views/Settings.vue'
 import SignUpm from '@/views/SignUp.vue'
 import Blog from '@/views/Blog.vue'
-import ShowBlog from '@/components/blog/ShowBlog.vue'
+import BlogVisuel from '@/views/BlogVisuel.vue'
 
 const routes = [
     { path: '/', component: Home },
@@ -12,7 +12,7 @@ const routes = [
     { path: '/signup', component: SignUpm },
     { path: '/blogs/create', component: Blog },
     { path: '/blogs/edit/:id', component: Blog },
-    { path: '/blogs/:id', component: ShowBlog },
+    { path: '/blogs/:id', component: BlogVisuel },
     { path: '/:pathMatch(.*)*', redirect: '/' },
 ]
 

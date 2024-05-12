@@ -2,6 +2,7 @@ import { ref } from 'vue'
 
 const localStorageToken = ref(false);
 const isAdmin = ref(false);
+const username = ref('');
 
 const getAdmin = () => {
     const token = localStorage.getItem("localcashToken");
@@ -36,13 +37,15 @@ const updateVariable = () => {
     if (token) {
         localStorageToken.value = true;
         isAdmin.value = getAdmin();
+        username.value = getUsername();
     } else {
         localStorageToken.value = false;
         isAdmin.value = false;
+        username.value = '';
     }
 };
 
-const getUser = () => {
+const getUsername = () => {
     const token = localStorage.getItem("localcashToken");
 
     if (!token) {
@@ -51,8 +54,8 @@ const getUser = () => {
 
     const decodedToken = parseJwt(token);
 
-    return decodedToken;
+    return decodedToken.username;
 };
 
-export { isAdmin, localStorageToken, updateVariable, getUser };
+export { isAdmin, localStorageToken, username, updateVariable };
 

@@ -1,12 +1,12 @@
 <template>
-    <button v-if="isAdmin" @click="createBlog" type="button" class="btn btn-outline-light container">Erstelle
+    <button v-if="username" @click="createBlog" type="button" class="btn btn-outline-light container">Erstelle
         Blog</button>
     <BlogCard v-for="blog in blogs" :key="blog.id" :blog="blog" />
 </template>
 
 <script setup>
 import { router } from '@/router/index.js';
-import { isAdmin } from '@/services/headerUserManagment.js';
+import { username } from '@/services/headerUserManagment.js';
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import BlogCard from '@/components/blog/BlogCard.vue';
