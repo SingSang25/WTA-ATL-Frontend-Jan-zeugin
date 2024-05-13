@@ -5,7 +5,7 @@
         </div>
         <div class="card-body">
             <div class="btn-group container">
-                <button type="button" class="btn btn-outline-light " @click="showBlog">Zeige Blog</button>
+                <button type="button" class="btn btn-outline-info " @click="showBlog">Zeige Blog</button>
                 <button v-if="isEdit" type="button" class="btn btn-outline-warning" @click="editBlog">Bearbeite
                     Blog</button>
                 <button v-if="isRemove" type="button" class="btn btn-outline-danger" @click="removeBlog">Lösche

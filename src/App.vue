@@ -6,6 +6,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import HeaderVue from '@/components/Header.vue'
 import FooterVue from '@/components/Footer.vue'
 import AlertComponent from '@/components/Alert.vue'
+import SelectColor from '@/components/SelectColor.vue'
 
 </script>
 
@@ -17,6 +18,7 @@ import AlertComponent from '@/components/Alert.vue'
   <main class="container mt-5">
     <alert-component />
     <router-view />
+    <SelectColor />
   </main>
 
   <footer>
