@@ -1,5 +1,5 @@
 <template>
-    <div class="btn-group p-4 ">
+    <div class="btn-group p-4 container">
         <button class="btn btn-outline-primary" @click="toggleEditMode">
             {{ isEditMode ? 'Gehe zur Vorschau' : 'Gehe zum Edit' }}
         </button>
@@ -29,21 +29,11 @@ import { setAlertMessage } from '@/services/alertService';
 
 const router = useRouter();
 const isEditMode = ref(false);
+const isNewBlog = ref(true);
 const isInvalidTitle = ref(false);
 const isInvalidEdit = ref(false);
 const title = ref("I bims ein Titel");
-const data = ref({
-    id: "",
-    time: 0,
-    blocks: [{
-        id: "sheNwCUP5A",
-        type: "header",
-        data: {
-            text: "Editor.js",
-            level: 2
-        }
-    }]
-});
+const data = ref({ blocks: [] });
 
 const getTitle = (newTitle) => {
     title.value = newTitle;
@@ -59,6 +49,14 @@ const saveData = () => {
         return;
     }
 
+    if (isNewBlog.value) {
+        createData();
+    } else {
+        updateData();
+    }
+}
+
+const createData = () => {
     data.value.title = title.value;
     axios.post(`http://localhost:3000/blogs/`, data.value)
         .then(() => {
@@ -67,13 +65,8 @@ const saveData = () => {
 }
 
 const updateData = () => {
-
-    if (!testData()) {
-        return;
-    }
-
     data.value.title = title.value;
-    axios.put(`http://localhost:3000/blogs/${data.value.id}`, data.value)
+    axios.put(`http://localhost:3000/blogs/${router.currentRoute.value.params.id}`, data.value)
         .then(() => {
             router.push('/');
         });
@@ -116,10 +109,24 @@ onMounted(() => {
                 data.value.id = response.data.id;
                 data.value.time = response.data.lastUpdated;
                 data.value.blocks = response.data.blocks;
+                data.value.time = 0;
                 title.value = response.data.title;
+                isNewBlog.value = false;
             });
+    } else {
+        data.value = {
+            id: "",
+            time: 0,
+            blocks: [{
+                id: "sheNwCUP5A",
+                type: "header",
+                data: {
+                    text: "Editor.js",
+                    level: 2
+                }
+            }]
+        };
     }
-
     if (data.value.id === "") {
         isEditMode.value = true;
     }

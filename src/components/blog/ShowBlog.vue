@@ -25,7 +25,7 @@ const data = ref(props.data);
 const title = ref(props.title);
 
 onMounted(async () => {
-    if (routes.params.id) {
+    if (routes.params.id && !(routes.fullPath.includes('edit'))) {
         await axios.get(`http://localhost:3000/blogs/${routes.params.id}`)
             .then((response) => {
                 data.value = response.data;

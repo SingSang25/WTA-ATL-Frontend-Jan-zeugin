@@ -67,7 +67,7 @@ onMounted(() => {
         return;
     }
 
-    if (props.blog.user.username === username) {
+    if (props.blog.user.username === username.value) {
         isEdit.value = true;
         isRemove.value = true;
         return;

@@ -31,10 +31,10 @@ const updateTitle = () => {
 EDITOR_JS_TOOLS.onChange = () => {
     editor.save()
         .then((outputData) => {
-            emit('changeData', outputData)
+            emit('changeData', outputData);
         })
         .catch((error) => {
-            AlertMessage('Saving failed: ', error)
+            AlertMessage('Saving failed: ', error);
         });
 };
 

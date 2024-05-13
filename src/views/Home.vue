@@ -1,5 +1,5 @@
 <template>
-    <button v-if="username" @click="createBlog" type="button" class="btn btn-outline-light container">Erstelle
+    <button v-if="username" @click="createBlog" type="button" class="btn btn-outline-info container">Erstelle
         Blog</button>
     <BlogCard v-for="blog in blogs" :key="blog.id" :blog="blog" />
 </template>
@@ -22,7 +22,6 @@ onMounted(() => {
         .then((response) => {
             blogs.value = response.data;
         });
-
 });
 
 </script>
