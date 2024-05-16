@@ -41,10 +41,14 @@ const signUp = async () => {
         return;
     }
 
-    let path = 'http://localhost:3000/auth/register';
+    const path = 'http://localhost:3000/auth/register';
     let errorData = false;
-    await axios
-        .post(path, { username, email, password })
+    await axios.post(path, { username, email, password })
+        .then(response => {
+            if (response.status === 400) {
+                errorData = true;
+            }
+        })
         .catch(error => {
             if (error.response.status === 400) {
                 errorData = true;
@@ -53,8 +57,7 @@ const signUp = async () => {
 
     if (!errorData) {
         const path = 'http://localhost:3000/auth/login';
-        await axios
-            .post(path, { email, password })
+        await axios.post(path, { email, password })
             .then(response => {
                 response = response.data;
                 localStorage.setItem("localcashToken", response.token);
