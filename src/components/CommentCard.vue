@@ -84,8 +84,9 @@ const editComment = (comment) => {
 };
 
 const saveComment = (comment) => {
+    comment.content = comment.editingContent;
     axios.put(`http://localhost:3000/comments/${routes.params.id}/${comment.id}`, {
-        comment: comment
+        data: comment
     }).then(() => {
         comment.editing = false;
     }).catch((error) => {
