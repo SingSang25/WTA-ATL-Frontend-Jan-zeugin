@@ -15,6 +15,7 @@
 import EditorJS from '@editorjs/editorjs';
 import { EDITOR_JS_TOOLS } from '@/services/editorContants.js';
 import { AlertMessage } from '@/services/alertService.js';
+import { onMounted } from 'vue';
 
 const props = defineProps(['data', 'title', 'setinvalidTitle', 'setinvalidEdit']);
 const emit = defineEmits(['changeData', 'updateTitle']);
@@ -39,5 +40,12 @@ EDITOR_JS_TOOLS.onChange = () => {
 };
 
 const editor = new EditorJS(EDITOR_JS_TOOLS);
+
+onMounted(() => {
+    editor.isReady
+        .then(() => {
+            editor.render(props.data);
+        });
+});
 
 </script>
