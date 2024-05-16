@@ -17,10 +17,28 @@
         <div v-for="comment in comments" :key="comment.id">
             <div class="list-group-item list-group-item-action">
                 <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1"> {{ comment.content }}</h5>
+                    <template v-if="comment.editing">
+                        <input type="text" class="form-control me-4" v-model="comment.editingContent">
+                    </template>
+                    <template v-else>
+                        {{ comment.content }}
+                    </template>
                     <small> {{ comment.lastUpdate }}</small>
                 </div>
-                <small>{{ comment.user.username }}</small>
+
+                <div class="d-flex w-100 justify-content-between">
+                    <small>Ersteller: {{ comment.user.username }}</small>
+                    <div v-if="isOwner(comment)" class="btn-group btn-group-sm">
+                        <button v-if="!comment.editing" type="button" class="btn btn-outline-danger"
+                            @click="removeComment(comment)">Löschen</button>
+                        <button v-if="!comment.editing" type="button" class="btn btn-outline-warning"
+                            @click="editComment(comment)">Bearbeiten</button>
+                        <button v-if="comment.editing" type="button" class="btn btn-outline-success"
+                            @click="saveComment(comment)">Speichern</button>
+                        <button v-if="comment.editing" type="button" class="btn btn-outline-warning"
+                            @click="cancelComment(comment)">Abbrechen</button>
+                    </div>
+                </div>
             </div>
         </div>
     </ol>
@@ -32,7 +50,7 @@ import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 
-import { localStorageToken, username } from '@/services/headerUserManagment.js';
+import { localStorageToken, username, isAdmin } from '@/services/headerUserManagment.js';
 
 const routes = useRoute();
 const comments = ref([]);
@@ -47,6 +65,36 @@ const createComment = (event) => {
             comments.value.push(response.data);
             newComment.value = '';
         });
+};
+
+const isOwner = (comment) => {
+    return isAdmin.value || comment.user.username === username.value;
+};
+
+const removeComment = (comment) => {
+    axios.delete(`http://localhost:3000/comments/${routes.params.id}/${comment.id}`)
+        .then(() => {
+            comments.value = comments.value.filter((c) => c.id !== comment.id);
+        });
+};
+
+const editComment = (comment) => {
+    comment.editing = true;
+    comment.editingContent = comment.content;
+};
+
+const saveComment = (comment) => {
+    axios.put(`http://localhost:3000/comments/${routes.params.id}/${comment.id}`, {
+        comment: comment
+    }).then(() => {
+        comment.editing = false;
+    }).catch((error) => {
+        comment.editing = false;
+    });
+};
+
+const cancelComment = (comment) => {
+    comment.editing = false;
 };
 
 onMounted(async () => {

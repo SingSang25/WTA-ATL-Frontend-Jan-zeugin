@@ -127,9 +127,6 @@ onMounted(() => {
             }]
         };
     }
-    if (data.value.id === "") {
-        isEditMode.value = true;
-    }
 });
 
 </script>
