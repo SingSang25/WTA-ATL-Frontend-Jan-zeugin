@@ -2,7 +2,7 @@
     <ol class="list-group m-4">
         <h5>Kommentare</h5>
 
-        <form v-if="localStorageToken" class="row g-3 mb-4" @submit="createComment">
+        <form v-if="localStorageToken" class="row g-3 mb-4">
             <div class="col-10">
                 <div class="input-group">
                     <span class="input-group-text">{{ username }}</span>
@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="col-2">
-                <button type="submit" class="btn btn-primary container">Kommentieren</button>
+                <button type="submit" class="btn btn-primary container" @click="createComment">Kommentieren</button>
             </div>
         </form>
 
@@ -57,7 +57,8 @@ const comments = ref([]);
 const newComment = ref('');
 
 const createComment = (event) => {
-    const comment = event.target[0].value;
+    event.preventDefault();
+    const comment = newComment.value;
     axios.post(`http://localhost:3000/comments/${routes.params.id}/`, {
         content: comment
     })
