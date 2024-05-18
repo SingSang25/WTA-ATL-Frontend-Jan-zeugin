@@ -1,29 +1,26 @@
-# WTA-ATL-Frontend-Jan-zeugin
+# Fronten für den Blog
 
-This template should help get you started developing with Vue 3 in Vite.
+Dieses Projekt ist das Frontend für den Blog. Es ist in Vue.js geschrieben und verwendet die API, die in einem anderen Repository zu finden ist.
 
-## Recommended IDE Setup
+## Einsatzbereich
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Dies ist ein einfaches Frontend für einen Blog. Es ist möglich, Blog zu erstellen, zu bearbeiten und zu löschen. Es ist auch möglich, Kommentare zu schreiben und zu bearbeiten. Es gibt auch eine einfache Benutzerverwaltung.
 
-## Customize configuration
+## Installation
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+1. Repository klonen
+2. `npm install` ausführen
 
-## Project Setup
+## Starten
 
-```sh
-npm install
-```
+1. Starte die zuerst die API
+2. `npm run dev` ausführen
+3. Das Frontend kann unter `http://localhost:5173/` erreicht werden
 
-### Compile and Hot-Reload for Development
+## Backend
 
-```sh
-npm run dev
-```
+Das Backend ist in einem anderen Repository zu finden: [Blog API](https://github.com/SingSang25/WTA-ATL-Jan-zeugin)
 
-### Compile and Minify for Production
+## Lizenz
 
-```sh
-npm run build
-```
+MIT License - siehe [LICENSE](LICENSE)
