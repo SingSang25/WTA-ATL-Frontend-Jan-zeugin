@@ -6,6 +6,7 @@ import { router } from './router/index.js'
 import { updateVariable } from './services/headerUserManagment.js'
 import { setAlertMessage } from './services/alertService.js'
 
+// Setze den Authorization Header für alle Requests
 axios.interceptors.request.use(async function (config) {
     const accessToken = localStorage.getItem('localcashToken');
     if (accessToken) {
@@ -15,6 +16,7 @@ axios.interceptors.request.use(async function (config) {
     return config;
 });
 
+// Erstelle den localcashToken im localStorage
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
